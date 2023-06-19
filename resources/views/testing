@@ -1,0 +1,53 @@
+@foreach($rows as $row)
+    <tr>
+        <td>{{ $row->name }}</td>
+        <td>{{ $row->email }}</td>
+        <td>
+            <button class="btn btn-primary showAlert" data-id="{{ $row->id }}" data-name="{{ $row->name }}">Show Alert</button>
+        </td>
+    </tr>
+@endforeach
+
+<!-- Include jQuery library -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Bootstrap modal -->
+<div class="modal" id="alertModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Alert Form</h5>
+            </div>
+            <form id="alertForm" method="POST" action="/store-data">
+                @csrf
+                <div class="modal-body">
+                    <input type="hidden" id="alertId" name="alertId">
+                    <div class="form-group">
+                        <label for="inputData">Data:</label>
+                        <input type="text" class="form-control" id="inputData" name="inputData" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+    $('.showAlert').click(function() {
+        var id = $(this).data('id');
+        var name = $(this).data('name');
+
+        // Set the ID value in the modal form
+        $('#alertId').val(id);
+
+        // Show the alert modal
+        $('#alertModal').modal('show');
+    });
+
+});
+</script>
