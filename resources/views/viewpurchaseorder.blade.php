@@ -15,10 +15,11 @@ use Carbon\Carbon; ?>
                 <tr>
                     <th scope="col">#</th>
                     <th></th>
+                    <th scope="col">Purchase code</th>
                     <th scope="col">Product</th>
                     <th scope="col">Supplier</th>
-                    <th scope="col">Order Quantity</th>
-                    <th scope="col">Received Quantity</th>
+                    <th scope="col">Order </th>
+                    <th scope="col">Received </th>
                     <th scope="col">Ordered By</th>
                     <th scope="col">Created Date</th>
                     <th scope="col">Status</th>
@@ -44,6 +45,7 @@ use Carbon\Carbon; ?>
                             </div>
                         </div>
                     </td>
+                    <td>#p{{ $purchase->id }}</td>
                     <td>{{ $purchase->products->product_name }}</td>
                     <td>{{ $purchase->products->suppliers->supplier_name }}</td>
                     <td>{{ $purchase->purchase_qty }}</td>
@@ -75,6 +77,7 @@ use Carbon\Carbon; ?>
             </tbody>
         </table>
     </div>
+    {{ $purchaseorder->links() }}
 </div>
 
 <div class="modal" id="alertModal" tabindex="-1" role="dialog">
@@ -118,7 +121,8 @@ use Carbon\Carbon; ?>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" data-dismiss="modal">Save</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">cancel</button>
                 </div>
             </form>
         </div>

@@ -14,11 +14,8 @@ class InvoiceController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        if(Auth::user()->user_roll != 1){
-            abort(403);
-        }
-        $invoices = Invoice::query()->get();
+    {        
+        $invoices = Invoice::query()->paginate(10);
         return view('invoice', compact('invoices'));
     }
 

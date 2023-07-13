@@ -18,7 +18,7 @@
                         <div class="card" style="border-radius: 15px;">
                             <div class="card-body p-4">
                                 <h1 class="text-center"><i class="bi bi-person-square" style="size:100px"></i></h1>
-                                <p class="text-uppercase text-center mb-5" style="font-size: large;font-weight:normal;">Create an Account</p>
+                                <p class="text-uppercase text-center mb-5" style="font-size: large;font-weight:normal;">Create a Member</p>
                                 @if ($errors->any())
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                     <ul>
@@ -32,11 +32,6 @@
                                 @endif
                                 <form action="/user" method="POST">
                                     @csrf
-                                    <div class="form-outline mb-4">
-                                        <label class="form-label" for="form3Example1cg">Your Name</label>
-                                        <input type="text" id="form3Example1cg" class="form-control form-control-md" name="yourname" />
-
-                                    </div>
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example1cg">Username</label>
                                         <input type="text" id="form3Example1cg" class="form-control form-control-md" name="username" />
@@ -54,10 +49,17 @@
 
                                     </div>
                                     <div class="form-outline mb-4">
-                                        <input type="submit" class="btn btn-primary" value="Submit">
+                                        <label for="user_roll" class="form-label">User Roll</label>
+                                        <select class="form-select" aria-label="Default select example" name="user_roll">
+                                            <option selected>Option User roll</option>
+                                            <option value="1" ?>Manager</option>
+                                            <option value="2" ?>Staff</option>
+                                        </select>
                                     </div>
-
-                                    <p class="text-center ">Have already an account? <a href="/loginform" class="btn btn-primary" style="text-decoration:none;"><u>Login here</u></a></p>
+                                    <div class="form-outline mb-4">
+                                        <input type="submit" class="btn btn-primary" value="Submit">
+                                        <a href="/user" class="btn btn-outline-dark">Cancel</a>
+                                    </div>
                                 </form>
 
                             </div>

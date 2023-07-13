@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Delivery;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Purchaseorder;
@@ -15,7 +14,7 @@ class PurchaseorderController extends Controller
      */
     public function index()
     {
-        $purchaseorder = Purchaseorder::all();       
+        $purchaseorder = Purchaseorder::orderBy('created_at', 'desc')->paginate(5);       
         return view('viewpurchaseorder', compact('purchaseorder'));
     }
 

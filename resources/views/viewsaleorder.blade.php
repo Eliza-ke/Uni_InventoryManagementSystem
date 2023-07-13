@@ -38,6 +38,7 @@ use Carbon\Carbon; ?>
             </tbody>
         </table>
     </div>
+    {{ $sales->links() }}
 </div>
 </div>
 <script>

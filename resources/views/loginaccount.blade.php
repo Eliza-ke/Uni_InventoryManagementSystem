@@ -48,7 +48,6 @@
                                         <input type="submit" class="btn btn-primary" value="Submit">
                                     </div>
 
-                                    <p class="text-center text-muted mt-5 mb-0">Not a member? <a href="/user/create" class="btn btn-primary"><u>Create Account</u></a></p>
                                 </form>
 
                             </div>

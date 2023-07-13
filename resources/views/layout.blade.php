@@ -18,8 +18,9 @@ use Illuminate\Support\Facades\Auth; ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
-    <!-- this is for chart.js package -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
     <title>Inventory Management System</title>
     <style>
         .navbar-brand {
@@ -42,12 +43,11 @@ use Illuminate\Support\Facades\Auth; ?>
                                 {{ Auth::user()->name }}
                                 <span <?php if (Auth::user()->user_roll == '1') : ?> class="badge text-bg-info">Manager
                                 <?php else : ?>
-                                     class="badge text-bg-warning"> Staff
+                                    class="badge text-bg-warning"> Staff
                                 <?php endif ?>
                                 </span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" style="min-width:0;">
-                                <li><a class="dropdown-item" href="/user/create" style="border-bottom: 1px solid #DDE6ED;">Create User Account</a></li>
                                 <li><a class="dropdown-item" href="/logout">Logout</a></li>
                             </ul>
                         </div>
@@ -58,7 +58,7 @@ use Illuminate\Support\Facades\Auth; ?>
         </div>
     </nav>
 
-    <div class="row" style="--bs-gutter-x: none;">
+    <div class="row" style="--bs-gutter-x: none; margin-right:15px">
         <div class="col-md-2">
             <ul class="nav flex-column">
                 @if (Auth::user()->user_roll == 1)
@@ -66,12 +66,12 @@ use Illuminate\Support\Facades\Auth; ?>
                     <a class="nav-link" href="/dashboard" style="text-decoration: none;color:black;padding-left:20px;margin:5px auto 8px auto">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/invoice" style="text-decoration: none;color:black;padding-left:20px;margin:5px auto 8px auto">Invoice</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="/saleorder" style="text-decoration: none;color:black;padding-left:20px;margin:5px auto 8px auto">Sale Order</a>
                 </li>
                 @endif
+                <li class="nav-item">
+                    <a class="nav-link" href="/invoice" style="text-decoration: none;color:black;padding-left:20px;margin:5px auto 8px auto">Invoice</a>
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="/purchaseorder" style="text-decoration: none;color:black;padding-left:20px;margin:5px auto 8px auto">Purchase Order</a>
@@ -121,7 +121,7 @@ use Illuminate\Support\Facades\Auth; ?>
                                 </button>
                             </h2>
                             <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body"><a href="supplier/create" style="text-decoration: none;">Create Supplier</a></div>
+                                <div class="accordion-body"><a href="/supplier/create" style="text-decoration: none;">Create Supplier</a></div>
                             </div>
                             <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body"><a href="/supplier" style="text-decoration: none;">View Supplier</a></div>
@@ -131,7 +131,21 @@ use Illuminate\Support\Facades\Auth; ?>
                 </li>
                 @if (Auth::user()->user_roll == 1)
                 <li class="nav-item">
-                    <a class="nav-link" href="/user" style="text-decoration: none;color:black;padding-left:20px;margin:5px auto 8px auto">Users</a>
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingFour">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                                    Member
+                                </button>
+                            </h2>
+                            <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body"><a href="/user/create" style="text-decoration: none;">Create Member</a></div>
+                            </div>
+                            <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body"><a href="/user" style="text-decoration: none;">View Member</a></div>
+                            </div>
+                        </div> <!-- accordion-item -->
+                    </div><!-- accordion-flush -->
                 </li>
                 @endif
             </ul>

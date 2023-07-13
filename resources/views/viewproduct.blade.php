@@ -2,8 +2,9 @@
 @section('content')
 <div>
     <div class="card">
-        <div class="card-header" style="font-size:27px;margin-bottom: 1%;padding:1%">
-            <i class="bi bi-list-check h3" style="margin-right: 10px;"></i>List of Products
+        <div class="card-header d-flex justify-content-between" style="font-size:27px;margin-bottom: 1%;padding:1%">
+            <span style="margin-right: 10px;"><i class="bi bi-list-check h3"></i> List of Products </span>
+            <a href="/product/create" class="btn btn-primary">Create <i class="bi bi-plus-circle"></i></a>
         </div>
 
         @if (session('createdproduct'))
@@ -21,7 +22,6 @@
         </div>
         @endif
 
-
         @if (session('deletedproduct'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('deletedproduct') }}
@@ -29,27 +29,27 @@
         </div>
         @endif
 
-        <div class="dropdown" style="margin-left: 2%;">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Category
-            </button>
-            <ul class="dropdown-menu">
-                <li style="border-bottom: 1px solid #DDE6ED;padding:3px"><a class="dropdown-item" href="/product">View all</a></li>
-                @foreach($categories as $category)
-                <li style="border-bottom: 1px solid #DDE6ED;padding:3px"><a class="dropdown-item" href="/productIndex/{{ $category->id }}"> {{ $category->catname }}</a></li>
-                @endforeach
-            </ul>
+        <div class="d-flex justify-content-between">
+            <div class="dropdown" style="margin-left: 2%;clear:both;">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Category
+                </button>
+                <ul class="dropdown-menu">
+                    <li style="border-bottom: 1px solid #DDE6ED;padding:3px"><a class="dropdown-item" href="/product">View all</a></li>
+                    @foreach($categories as $category)
+                    <li style="border-bottom: 1px solid #DDE6ED;padding:3px"><a class="dropdown-item" href="/productIndex/{{ $category->id }}"> {{ $category->catname }}</a></li>
+                    @endforeach
+                </ul>
+            </div>
+            <form action="{{route('search')}}" class="mb-3 row" method="post" style="margin-right: 20px;">
+                @csrf
+                <input type="text" name="search" class="form-control dark" placeholder="Type to search ..." style="border:1px solid #013c7e7a">
+                <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i></button>
+            </form>
         </div>
-        <!-- <div class="dropdown">
-            <select class="form-select" aria-label="Default select example" name="category_id">
-                <option selected>Option Category</option>
-                @foreach($categories as $category)
-                <option value="{{ $category->id }}" ?>{{ $category->catname }}</option>
-                @endforeach
-            </select>
-        </div> -->
 
         <div class="card-body">
+
             <?php $num = 1; ?>
             <table class="table table-stripped text-center">
                 <thead class="table-dark">
@@ -76,7 +76,7 @@
                         <td>{{ $product->description }}</td>
                         <td>{{ $product->price }}</td>
                         <td>{{ $product->quantity }}</td>
-                        <td><img src="../views/images/CbbrTLD8m35b8vHlIQgD25K9mOoWLvwBY0hYThcN.jpg" width="80" height="70" class="rounded float-start"> </td>
+                        <td><img src="{{asset('images/'.$product->images)}}" width="80" height="70" class="rounded float-start"> </td>
                         <td>
                             <div class="d-flex flex-row" style="padding-left: 5%;">
                                 <div class="p-2">

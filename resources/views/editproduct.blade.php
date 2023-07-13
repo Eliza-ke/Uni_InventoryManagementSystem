@@ -54,7 +54,7 @@
             </div>
             <div class="mb-3">
                 <label for="formFile" class="form-label">Image</label>
-                <img src="../../public/storage/app/photo/{{ $product->image }}" alt="Image" width="80" height="70" class="rounded float-start">
+                <img src="{{asset('images/'.$product->images)}}" alt="Image" width="80" height="70" class="rounded float-start">
             </div>
 
             <div class="mb-3">

@@ -15,26 +15,29 @@
             </ul>
         </div>
     </div>
-    <button type="button" class="btn btn-success" style="margin-right: 1%; marign: bo;padding:2%">
-        <h4> Total Revenue For All Year</h4>
+
+
+    <button type="button" class="btn btn-success" style="margin-right: 1%;padding:2%">
+        <h4> Total Revenue by {{ $year }}</h4>
         <span>
             <h4> {{ $revenue }}</h4>
         </span>
     </button>
 
     <button type="button" class="btn btn-warning" style="margin-right: 1%;padding:2%">
-        <h4> Total Cost For All Year</h4>
+        <h4> Total Cost by {{ $year }}</h4>
         <span>
             <h4> {{ $cost }}</h4>
         </span>
     </button>
 
     <button type="button" class="btn btn-primary" style="margin-right: 1%;padding:2%">
-        <h4> Total Profit For All Year</h4>
+        <h4> Total Profit by {{ $year }}</h4>
         <span>
             <h4> {{ $profit = $revenue - $cost }}</h4>
         </span>
     </button>
+
 </div>
 </div>
 @endsection

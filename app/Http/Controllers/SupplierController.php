@@ -12,7 +12,7 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        $suppliers = Supplier::all();
+        $suppliers = Supplier::query()->paginate(3);
         return view('viewsupplier', compact('suppliers'));
     }
 
@@ -89,8 +89,6 @@ class SupplierController extends Controller
      */
     public function destroy(string $id)
     {
-        Supplier::destroy($id);
-        session()->flash('deletedsupplier', 'Deleted successfully.');
-        return redirect('/supplier');
+    
     }
 }

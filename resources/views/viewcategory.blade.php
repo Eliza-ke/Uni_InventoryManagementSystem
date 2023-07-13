@@ -2,8 +2,9 @@
 @section('content')
 <div>
     <div class="card">
-        <div class="card-header" style="font-size:27px;margin-bottom: 1%;padding:1%">
-            <i class="bi bi-list-check h3" style="margin-right: 10px;"></i>List of Category
+        <div class="card-header d-flex justify-content-between" style="font-size:27px;margin-bottom: 1%;padding:1%">
+            <span style="margin-right: 10px;"><i class="bi bi-list-check h3"></i> List of Category</span>
+            <a href="/category/create" class="btn btn-primary">Create <i class="bi bi-plus-circle"></i></a>
         </div>
 
         @if (session('createdcategory'))
@@ -62,6 +63,7 @@
                 </tbody>
             </table>
         </div>
+        {{ $cat->links() }}
     </div>
 </div>
 </div>

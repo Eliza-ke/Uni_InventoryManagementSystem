@@ -13,7 +13,8 @@ class SaleorderController extends Controller
         if (Auth::user()->user_roll != 1) {
             abort(403);
         }
-        $sales = Saleorder::query()->get();
-        return view('viewsaleorder',compact('sales'));
+            $sales = Saleorder::query()->paginate(10);
+            return view('viewsaleorder', compact('sales'));
+        
     }
 }

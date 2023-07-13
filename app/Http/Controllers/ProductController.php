@@ -51,7 +51,6 @@ class ProductController extends Controller
             'img' => 'required|image',
         ]);
 
-        $path = $request->file('img')->store('photo');
 
         $product = new Product();
         $product->product_name = $validated['pname'];
@@ -60,7 +59,11 @@ class ProductController extends Controller
         $product->description = $validated['description'];
         $product->price = $validated['price'];
         $product->quantity = $validated['qty'];
-        $product->images = $path;
+
+        $image_file = $request->file('img');
+        $image_name = uniqid().'_'.$image_file->getClientOriginalName();
+        $image_file->move(public_path().'/images/', $image_name);
+        $product->images = $image_name;
 
         $product->save();
         session()->flash('createdproduct', 'Created successfully.');
@@ -87,7 +90,6 @@ class ProductController extends Controller
         return view('editproduct', compact('product', 'categories','suppliers'));
 
     }
-
     /**
      * Update the specified resource in storage.
      */
@@ -110,8 +112,10 @@ class ProductController extends Controller
         $product->price = $validated['price'];
         $product->quantity = $validated['qty'];
         if (isset($request->img)) {
-            $path = $request->file('img')->store('photo');
-            $product->images = $path;
+            $image_file = $request->file('img');
+            $image_name = uniqid() . '_' . $image_file->getClientOriginalName();
+            $image_file->move(public_path() . '/images/', $image_name);
+            $product->images = $image_name;
         }
 
         $product->save();
@@ -128,5 +132,20 @@ class ProductController extends Controller
         Product::findOrFail($id)->delete();
         session()->flash('deletedproduct', 'Deleted successfully.');
         return redirect('/product');
+    }
+
+    public function search(Request $request){
+        $categories = Category::all();
+        $query = Product::query()->join('categories', 'products.category_id', '=', 'categories.id');
+        if ($request->search != '') {
+            $query->orWhere('product_name', 'like', '%' . $request->search . '%');
+            $query->orWhere('catname', 'like', '%' . $request->search . '%');
+            $query->orWhere('products.description', 'like', '%' . $request->search . '%');
+        }
+        $products = $query->paginate(3);
+        return view('viewsearch')->with([
+            'products' => $products,
+            'categories' => $categories
+        ]);
     }
 }

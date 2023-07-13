@@ -12,20 +12,14 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-
-    public function __construct()
-    {
-    
-        $this->middleware('auth')->only('index');
-        
-    }
     public function index()
     {
         if (Auth::user()->user_roll != 1) {
             abort(403);
+        }else{
+            $user = User::all();
+            return view('manageuseraccount', compact('user'));
         }
-        $user = User::all();
-        return view('manageuseraccount', compact('user'));
     }
 
     /**
@@ -33,7 +27,12 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('createaccount');
+        if (Auth::user()->user_roll != 1) {
+            abort(403);
+        }else{
+            return view('createaccount');
+        }
+        
     }
 
     /**
@@ -42,21 +41,20 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'yourname' => 'required|max:255',
             'username' => 'required|max:255',
             'email' => 'required',
             'password' => 'required',
+            'user_roll' => 'required'
         ]);
 
         $user = new User();
-        $user->your_name = $validated['yourname'];
         $user->name = $validated['username'];
         $user->email = $validated['email'];
         $user->password = $validated['password'];
-        $user->user_roll = "2";
+        $user->user_roll = $validated['user_roll'];
 
         $user->save();
-        return redirect('/loginform');
+        return redirect('/user');
     }
 
     /**
@@ -88,6 +86,8 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        User::destroy($id);
+        session()->flash('deleteduser', 'Deleted successfully.');
+        return redirect('/user');
     }
 }

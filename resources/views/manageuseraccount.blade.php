@@ -3,14 +3,13 @@
 <div>
     <div class="card">
         <div class="card-header" style="font-size:27px;margin-bottom: 1%;padding:1%">
-            Manage User Account
+            <span style="margin-right: 10px;"><i class="bi bi-list-check h3"></i> List of Members </span>
         </div>
         <div class="card-body">
             <table class="table table-stripped text-center">
                 <thead class="table-dark">
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">UserRoll</th>
                         <th scope="col">Action</th>
@@ -21,13 +20,12 @@
                     @foreach($user as $user)
                     <tr>
                         <th scope="row">{{ $num }}</th>
-                        <td>{{ $user->your_name }}</td>
                         <td>{{ $user->email}}</td>
                         <td>
                             @if($user->user_roll == 1)
-                                Manager
+                            Manager
                             @else
-                                Staff
+                            Staff
                             @endif
                         </td>
                         <td>
